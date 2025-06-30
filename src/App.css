@@ -1,0 +1,98 @@
+@font-face {
+  font-family: Gladolia;
+  src: url(../public/fonts/gladolia-demo/GladoliaDEMO-Regular.otf);
+}
+
+@font-face {
+  font-family: Cloudy;
+  src: url(../public/fonts/cloudy-peaches-demo/Cloudy\ Peaches\ Demo.otf);
+}
+
+#root {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 2rem;
+  text-align: center;
+}
+
+.logo {
+  height: 6em;
+  padding: 1.5em;
+  will-change: filter;
+  transition: filter 300ms;
+}
+.logo:hover {
+  filter: drop-shadow(0 0 2em #646cffaa);
+}
+.logo.react:hover {
+  filter: drop-shadow(0 0 2em #61dafbaa);
+}
+
+@keyframes logo-spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  a:nth-of-type(2) .logo {
+    animation: logo-spin infinite 20s linear;
+  }
+}
+
+h1 {
+  margin-top: 6rem;
+}
+
+.card {
+  padding: 2em;
+}
+
+.read-the-docs {
+  color: #888;
+}
+
+button {
+  margin-right: 10px;
+}
+
+.numbers-container-div {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  font-size: 4rem;
+  height: 250px;
+  margin-bottom: 4rem;
+}
+
+.numbers-container-div .text {
+  margin: 1.5rem;
+}
+
+.number-div {
+  border-radius: 55px;
+  background-color: white;
+  color: rgb(250, 152, 168);
+  height: 200px;
+  width: 90px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border: 0.5rem solid pink;
+  outline: 0.75rem solid rgb(255, 255, 141);
+  font-family: Cloudy;
+}
+
+.number-div:before {
+  content: " ";
+  position: absolute;
+  z-index: -1;
+  top: 0px;
+  left: 0px;
+  right: 0px;
+  bottom: 0px;
+  border: 0.75rem solid pink;
+}
