@@ -32,6 +32,9 @@ function App() {
     pause();
     setSeconds(DURATION);
   };
+  const rest = () => {
+    setSeconds(600);
+  };
 
   const formatTime = (s: number) => {
     const mins = Math.floor(s / 60);
@@ -51,13 +54,11 @@ function App() {
         <div className="number-div">{formatTime(seconds)[4]}</div>
       </div>
       <div>
-        <button onClick={start} disabled={isRunning}>
-          Start
-        </button>
-        <button onClick={pause} disabled={!isRunning}>
-          Pause
+        <button onClick={isRunning ? pause : start}>
+          {isRunning ? "Pause" : "Start"}
         </button>
         <button onClick={reset}>Reset</button>
+        <button onClick={rest}>Rest</button>
       </div>
       <h1>Pomodoro Time</h1>
     </>
