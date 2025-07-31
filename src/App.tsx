@@ -1,67 +1,30 @@
-import { useEffect, useRef, useState } from "react";
+import { useState } from "react";
 import "./App.css";
+import Layout from "./Layout";
+import Pomodoro from "./views/Pomodoro";
+import WorkingTime from "./views/WorkingTime";
+
+export enum AppMode {
+  POMODORO = "Pomodoro",
+  WORKING = "Working",
+}
 
 function App() {
-  const DURATION = 3600; // segundos
-  const [seconds, setSeconds] = useState(DURATION);
-  const [isRunning, setIsRunning] = useState(false);
-  const intervalRef = useRef<number | null>(null);
+  const [mode, setMode] = useState<AppMode>(AppMode.POMODORO);
 
-  useEffect(() => {
-    if (isRunning) {
-      intervalRef.current = window.setInterval(() => {
-        setSeconds((prev) => {
-          if (prev <= 1) {
-            clearInterval(intervalRef.current!);
-            setIsRunning(false);
-            return 0;
-          }
-          return prev - 1;
-        });
-      }, 1000);
+  const changeMode = () => {
+    if (mode === AppMode.POMODORO) {
+      setMode(AppMode.WORKING);
+    } else {
+      setMode(AppMode.POMODORO);
     }
-
-    return () => {
-      if (intervalRef.current) clearInterval(intervalRef.current);
-    };
-  }, [isRunning]);
-
-  const start = () => setIsRunning(true);
-  const pause = () => setIsRunning(false);
-  const reset = () => {
-    pause();
-    setSeconds(DURATION);
-  };
-  const rest = () => {
-    setSeconds(600);
-  };
-
-  const formatTime = (s: number) => {
-    const mins = Math.floor(s / 60);
-    const secs = s % 60;
-    return `${mins.toString().padStart(2, "0")}:${secs
-      .toString()
-      .padStart(2, "0")}`;
   };
 
   return (
-    <>
-      <div className="numbers-container-div">
-        <div className="number-div">{formatTime(seconds)[0]}</div>
-        <div className="number-div">{formatTime(seconds)[1]}</div>
-        <p className="text">:</p>
-        <div className="number-div">{formatTime(seconds)[3]}</div>
-        <div className="number-div">{formatTime(seconds)[4]}</div>
-      </div>
-      <div>
-        <button onClick={isRunning ? pause : start}>
-          {isRunning ? "Pause" : "Start"}
-        </button>
-        <button onClick={reset}>Reset</button>
-        <button onClick={rest}>Rest</button>
-      </div>
-      <h1>Pomodoro Time</h1>
-    </>
+    <Layout changeMode={changeMode} mode={mode}>
+      {mode === AppMode.POMODORO && <Pomodoro />}
+      {mode === AppMode.WORKING && <WorkingTime />}
+    </Layout>
   );
 }
 
